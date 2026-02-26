@@ -1,4 +1,5 @@
-import {useLocation} from 'react-router';
+import {NavLink} from 'react-router';
+import './navigation.css'
 
 const navList = [
     {link: '/', label: "Home"},
@@ -9,18 +10,26 @@ const navList = [
 ]
 
 // link: string, label: string, isActive: boolean
-const NavigationButton = ({link, label, isActive})=>{
-    return<a href={link} style={{fontWeight: 'bold', textDecoration: 'none', color: isActive ? 'red' : 'black'}}>{label}</a>
+const NavigationButton = ({link, label})=>{
+    return  <NavLink
+                to={link}
+                className={({ isActive }) =>
+                `nav-btn ${isActive ? 'nav-btn-active' : 'nav-btn-inactive'}`
+                }
+            >
+                {label}
+            </NavLink>
 }
 
 
 export const Navigation = ()=>{
-    const {pathname} = useLocation();
-    return navList.map((item)=>
-        <NavigationButton 
-            key={item.label}
-            link={item.link} 
-            label={item.label} 
-            isActive={pathname === item.link}/>
-    )
+    return <div className='nav-container'> 
+        {navList.map((item)=>
+            <NavigationButton 
+                key={item.label}
+                link={item.link} 
+                label={item.label}/>
+                
+        )}
+    </div>
 }

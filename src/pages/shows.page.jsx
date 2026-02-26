@@ -1,7 +1,7 @@
-import { Layout } from "../components/layout/layout.component";
+
 
 export const Shows = ()=>{
-    return <Layout>
+    return <>
     Shows
-</Layout>
+</>
 }

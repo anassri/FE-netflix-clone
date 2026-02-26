@@ -1,8 +1,9 @@
 import { Navigation } from "../navigation/navigation.component"
 
-export const Layout =({children})=>{
+export const Layout =(prop)=>{
     return <>
         <Navigation />
-        {children}
+        {prop.children}
     </>
 }
+
