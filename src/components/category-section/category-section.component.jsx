@@ -1,3 +1,4 @@
+import { CategoryItem } from '../category-item/category-item.component';
 import './category-section.css'
 import {useState} from 'react';
 
@@ -18,14 +19,13 @@ export const CategorySection = ({category})=>{
         </h3>   
         <div className='category-items-container'>
             {category.items.map((item)=>
-            <div 
-                key={item.id} 
-                onMouseEnter={()=>handleMouseIn(item.id)}
-                onMouseLeave={handleMouseOut}
-            >
-                {item.title}
-                {hoveredTitleId === item.id ? <div>Hovered</div> : null}
-            </div>
+                <CategoryItem
+                    key={item.id} 
+                    item={item} 
+                    handleMouseIn={handleMouseIn} 
+                    handleMouseOut={handleMouseOut} 
+                    hoveredTitleId={hoveredTitleId}
+                />
             )}
         </div>
     </section>

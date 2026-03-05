@@ -5,6 +5,12 @@
     align-items: flex-start;
 }
 
-.category-items-container {
+.category-items-container{
     display: flex;
+    column-gap: 16px;
+}
+
+.item-container {
+    display: flex;
+    flex-direction: column;
 }
