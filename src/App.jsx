@@ -5,13 +5,14 @@ import { Shows } from './pages/shows.page';
 import { Movies } from './pages/movies.page';
 import { Games } from './pages/games.page';
 import { Account } from './pages/account.page';
-import { Navigation } from './components/navigation/navigation.component';
+import { Login } from './pages/login.page';
 
 const App = ()=>{
+  
   return (
     <div className='main'>
-      <Navigation />
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route path="/account" element={<Account />} />
         <Route path="/shows" element={<Shows />} />
         <Route path="/movies" element={<Movies />} />

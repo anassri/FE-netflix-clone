@@ -35,7 +35,7 @@ export const CategoryItem = (
                 <span>{item.genre}</span>  •
                 <span>{item.endDate}</span> •
                 <span>{item.numOfSeasons} Seasons </span>•
-                {item.rating ? <span>TV-{item.rating}</span>: <span>Unrated</span> }
+                {item.rating ? <span>{item.itemType ==="TV" ? "TV-" : ""}{item.rating}</span>: <span>Unrated</span> }
 
                 </div>
                 

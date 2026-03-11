@@ -1,7 +1,7 @@
 
-
+import {Layout} from '../components/layout/layout.component';
 export const Games = ()=>{
-    return <>
+    return <Layout>
         Games
-    </>
+    </Layout>
 }

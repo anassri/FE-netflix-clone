@@ -1,4 +1,4 @@
-import {NavLink} from 'react-router';
+import {NavLink, useNavigate} from 'react-router';
 import './navigation.css'
 
 const navList = [
@@ -6,16 +6,24 @@ const navList = [
     {link: '/shows', label: "Shows"},
     {link: '/movies', label: "Movies"},
     {link: '/games', label: "Games"},
-    {link: '/account', label: "My Netflix"}
+    {link: '/account', label: "My Netflix"},
+    {link: '/login', label: "Logout"},
+
 ]
 
 // link: string, label: string, isActive: boolean
 const NavigationButton = ({link, label})=>{
-    return  <NavLink
+    const navigate = useNavigate();
+    const handleLogout = ()=>{
+            localStorage.removeItem('credentials');
+            navigate("/login")
+    }
+    return  label === 'Logout' ? <div onClick={handleLogout} className='nav-btn nav-btn-inactive' style={{cursor: 'pointer'}}>{label}</div> : <NavLink
                 to={link}
                 className={({ isActive }) =>
                 `nav-btn ${isActive ? 'nav-btn-active' : 'nav-btn-inactive'}`
                 }
+                onClick={handleLogout}
             >
                 {label}
             </NavLink>
