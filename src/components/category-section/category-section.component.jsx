@@ -2,7 +2,8 @@ import { CategoryItem } from '../category-item/category-item.component';
 import './category-section.css'
 import {useState} from 'react';
 
-export const CategorySection = ({category})=>{
+// Category is now an array of titles
+export const CategorySection = ({titles})=>{
     const [hoveredTitleId, setHoveredTitleId] = useState(null);
 
     const handleMouseIn = (id)=>{
@@ -15,10 +16,10 @@ export const CategorySection = ({category})=>{
 
     return <section className="category-container">
         <h3>
-            {category.title}
+            New on Netflix
         </h3>   
         <div className='category-items-container'>
-            {category.items.map((item)=>
+            {titles.map((item)=>
                 <CategoryItem
                     key={item.id} 
                     item={item} 

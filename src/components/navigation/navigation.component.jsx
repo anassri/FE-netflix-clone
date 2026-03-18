@@ -18,15 +18,22 @@ const NavigationButton = ({link, label})=>{
             localStorage.removeItem('credentials');
             navigate("/login")
     }
-    return  label === 'Logout' ? <div onClick={handleLogout} className='nav-btn nav-btn-inactive' style={{cursor: 'pointer'}}>{label}</div> : <NavLink
-                to={link}
-                className={({ isActive }) =>
-                `nav-btn ${isActive ? 'nav-btn-active' : 'nav-btn-inactive'}`
-                }
-                onClick={handleLogout}
-            >
+    return  label === 'Logout' ? 
+        <div 
+            onClick={handleLogout} 
+            className='nav-btn nav-btn-inactive' 
+            style={{cursor: 'pointer'}}>
                 {label}
-            </NavLink>
+        </div> 
+    : 
+    <NavLink
+        to={link}
+        className={({ isActive }) =>
+        `nav-btn ${isActive ? 'nav-btn-active' : 'nav-btn-inactive'}`
+        }
+        >
+        {label}
+    </NavLink>
 }
 
 
