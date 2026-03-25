@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router';
 const initialState = {
     loading: false,
     error: '',
-    data: []
+    data: [], // [ ]
 }
 
 const fetchReducer = (state, action)=>{
@@ -38,14 +38,14 @@ export const Home = ()=>{
                 "Content-Type":  "application/json"
             }
         })
-        setTimeout(async ()=>{
+        // setTimeout(async ()=>{
             if(res.status === 200) {
                 const body = await res.json();
                 dispatch({type: 'SUCCESSFUL', payload: body.data})
             } else {
                 dispatch({type: 'ERROR', payload: 'An error has occurred'})
             }
-        }, 2000)
+        // }, 2000)
 
         // fetch("https://jsonfakery.com/movies/paginated", {
         //     method: 'GET',
@@ -58,7 +58,7 @@ export const Home = ()=>{
         //         return res.json()
         //     }
         // })
-        // .then((body)=> setHomeTitles(body.data))
+        // .then((body)=> dispatch({type: 'SUCCESSFUL', payload: body.data}))
         // .catch((e)=> console.log(e))
     }
     useEffect(()=>{
