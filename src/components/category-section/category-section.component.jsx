@@ -3,7 +3,7 @@ import './category-section.css'
 import {useEffect, useRef, useState} from 'react';
 
 // Category is now an array of titles
-export const CategorySection = ({titles})=>{
+export const CategorySection = ({titles, dispatch, likedTitles, label="New on Netflix"})=>{
     const [hoveredTitleId, setHoveredTitleId] = useState(null);
     const [startIndex, setStartIndex] = useState(0);
     const [endIndex, setEndIndex] = useState(0);
@@ -56,7 +56,7 @@ export const CategorySection = ({titles})=>{
 
     return <section className="category-container">
         <h3>
-            New on Netflix
+            {label}
         </h3>   
         <div className='category-items-container' ref={categorySectionRef} >
             {titles.slice(startIndex,endIndex).map((item)=>
@@ -66,6 +66,8 @@ export const CategorySection = ({titles})=>{
                     handleMouseIn={handleMouseIn} 
                     handleMouseOut={handleMouseOut} 
                     hoveredTitleId={hoveredTitleId}
+                    dispatch={dispatch}
+                    likedTitles={likedTitles}
                 />
             )}
             <button style={{position: "absolute", right: 0}} onClick={handleNextSet}>Next</button>

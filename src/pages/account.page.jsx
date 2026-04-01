@@ -1,6 +1,8 @@
 import {Layout} from '../components/layout/layout.component';
-export const Account = ()=>{
+import { CategorySection } from '../components/category-section/category-section.component';
+
+export const Account = ({dispatch, likedTitles})=>{
     return <Layout>
-                Account
+              {likedTitles.length > 0 && <CategorySection titles={likedTitles} dispatch={dispatch} likedTitles={likedTitles} label='Liked Titles'/>}
         </Layout>
 }

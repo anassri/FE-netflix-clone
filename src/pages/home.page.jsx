@@ -1,32 +1,26 @@
 import {CategorySection} from '../components/category-section/category-section.component'
 import { Layout } from '../components/layout/layout.component';
-import { useEffect, useState, useReducer } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
-const initialState = {
-    loading: false,
-    error: '',
-    data: [], // [ ]
-}
+// I want to Like a title
+// UI: show a thumbs up icon:
+// when active (liked) => shows filled icon
+// when inactive(not liked) => shows outlined icon
 
-const fetchReducer = (state, action)=>{
-    switch(action.type) {
-        case 'LOADING':
-            return {...state, loading: true}
-        case 'ERROR': 
-            return {...state, error: action.payload, loading: false}
-        case 'SUCCESSFUL':
-            return {...state, data: action.payload, loading: false}
-        default:
-            return {...state, loading: false, error: ''} 
-    }   
-}
+// Data logic: I want to keep track of the titles liked
+// Move my useReducer logic up a level, 
+// Then pass eveything the useReducer exposes, (data, dispatch)
+// Then defined two new actions in the reducer, one adds title, one removes 
+// Account passes likedTitles to the title prop of the category section component
+// Home passes data to the title prop of the same component.
 
-export const Home = ()=>{
+
+export const Home = ({dispatch, data, error,loading, likedTitles})=>{
     // const [homeTitles, setHomeTitles] = useState([]);
     // const [isLoading, setIsLoading] = useState(false);
     // const [error, setError] = useState('');
-    const [{data, loading, error}, dispatch] = useReducer(fetchReducer, initialState)
+    
 
     const navigate = useNavigate();
     
@@ -62,7 +56,9 @@ export const Home = ()=>{
         // .catch((e)=> console.log(e))
     }
     useEffect(()=>{
-        void fetchHomeData();
+        if(data.length === 0){
+            void fetchHomeData();
+        }
     }, [])
 
     useEffect(()=>{
@@ -71,14 +67,14 @@ export const Home = ()=>{
             navigate("/login");
         }
     }, [])
-
+    console.log(likedTitles)
     return <Layout>
             {loading ? 
             <span style={{color: 'white'}}>Loading....</span>
             : error ? 
             <span style={{color: 'red'}}>{error}</span>
             :
-            <CategorySection titles={data} />
+            <CategorySection titles={data} dispatch={dispatch} likedTitles={likedTitles} />
         }
     </Layout>
            

@@ -4,12 +4,14 @@ import { useAuthentication } from '../hooks/storage'
 
 export const Login = ()=>{
     const {handleLogin} = useAuthentication()
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     
+    const handleLoginWithValidation =(e)=>{
+        e.preventDefault();
 
-    const handleLoginWithValidation =()=>{
         if(!email){
             setError('Email is required')
         } else if(!email.includes('@')){
@@ -29,7 +31,7 @@ export const Login = ()=>{
     // 3. componentWillUnmount
 
 
-    return <div className="login-container">
+    return <form className="login-container" onSubmit={handleLoginWithValidation}>
         <div className='input-container'>
 
             <label htmlFor="email">Email</label>
@@ -41,6 +43,6 @@ export const Login = ()=>{
             <input type="password" name="passowrd" id="password" value={password} onChange={(e)=>setPassword(e.target.value)} />
         </div>
             {error && <span style={{color: 'red'}}>{error}</span>}
-            <button id="login-button" onClick={handleLoginWithValidation}>Login</button>
-    </div>
+            <button type='submit' id="login-button" >Login</button>
+    </form>
 }
