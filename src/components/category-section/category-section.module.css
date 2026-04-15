@@ -1,0 +1,6 @@
+.categoryItemsContainer {
+    display: flex;
+    column-gap: 16px;
+    width: 100%;
+    overflow-x: hidden;
+}

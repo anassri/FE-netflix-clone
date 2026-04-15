@@ -16,3 +16,15 @@
     display: flex;
     flex-direction: column;
 }
+
+.flex {
+    display: flex;
+}
+
+.flex-col{
+    flex-direction: column
+} 
+
+.pb-1{
+    padding-bottom: 4px;
+}

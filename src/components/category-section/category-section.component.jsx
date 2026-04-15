@@ -1,12 +1,23 @@
+import { styled } from 'styled-components';
 import { CategoryItem } from '../category-item/category-item.component';
-import './category-section.css'
+import './category-section.css';
+import {categoryItemsContainer} from './category-section.module.css';
 import {useEffect, useRef, useState} from 'react';
 
+const Title = styled.h3`
+    color: ${props => props.primary === true ? 'red' : 'white' };
+    font-size: 24px;
+`
+
+const BigTitle = styled(Title)`
+    border: solid 3px red;
+`
 // Category is now an array of titles
 export const CategorySection = ({titles, dispatch, likedTitles, label="New on Netflix"})=>{
     const [hoveredTitleId, setHoveredTitleId] = useState(null);
     const [startIndex, setStartIndex] = useState(0);
     const [endIndex, setEndIndex] = useState(0);
+    const [primary, setPrimary] = useState(true);
     const categorySectionRef = useRef(null);
     const handleMouseIn = (id)=>{
         setHoveredTitleId(id)
@@ -54,11 +65,14 @@ export const CategorySection = ({titles, dispatch, likedTitles, label="New on Ne
         determineCategroyIndices()
     }, [])
 
-    return <section className="category-container">
-        <h3>
+    return <section className={`flex flex-col pb-1 bg-${primary === true ? 'red': 'white'}`}>
+        <Title primary={true} >
             {label}
-        </h3>   
-        <div className='category-items-container' ref={categorySectionRef} >
+        </Title> 
+        <BigTitle primary={false}>
+            {label}
+        </BigTitle>  
+        <div className={categoryItemsContainer} ref={categorySectionRef} >
             {titles.slice(startIndex,endIndex).map((item)=>
                 <CategoryItem
                     key={item.id} 
@@ -71,6 +85,7 @@ export const CategorySection = ({titles, dispatch, likedTitles, label="New on Ne
                 />
             )}
             <button style={{position: "absolute", right: 0}} onClick={handleNextSet}>Next</button>
+            
         </div>
     </section>
 }
